@@ -13,10 +13,10 @@ Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura
 Rodolfo Jesus - https://github.com/lrodolfol
 
 ### 💂‍♀️ Batalhão
-* [NOME e GITHUB]
-* [NOME e GITHUB]
-* [NOME e GITHUB]
-* [NOME e GITHUB]
+* Anthony - https://github.com/anthonyhw
+* Victor - https://github.com/victor-azevedo
+* Kirmct - https://github.com/Kirmct
+* Leonardo
 
 ## ⚙️ Tecnologias
 * C# 12
