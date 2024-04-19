@@ -10,7 +10,7 @@ Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura
 
 ## Participantes
 ### 🚀 Capitão
-[NOME e GITHUB]
+Rodolfo Jesus - https://github.com/lrodolfol
 
 ### 💂‍♀️ Batalhão
 * [NOME e GITHUB]
