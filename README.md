@@ -16,7 +16,7 @@ Rodolfo Jesus - https://github.com/lrodolfol
 * Anthony - https://github.com/anthonyhw
 * Victor - https://github.com/victor-azevedo
 * Kirmct - https://github.com/Kirmct
-* Leonardo
+* Leonardo - https://github.com/LeozinRomeiro
 
 ## ⚙️ Tecnologias
 * C# 12
