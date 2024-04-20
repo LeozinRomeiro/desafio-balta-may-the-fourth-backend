@@ -3,7 +3,7 @@
     public class Movie : Entity
     {
         public string Title { get; private set; } = null !;
-        public int Episode { get; private set; }
+        public short Episode { get; private set; }
         public string OpeningCrawl { get; private set; } = null !;
         public string Director { get; private set; } = null !;
         public string Producer { get; private set; } = null !;
