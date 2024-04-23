@@ -11,7 +11,7 @@ public class CharacterRepository : ICharacterRepository
     public CharacterRepository(AppDbContext appDbContext) =>
         _appDbContext = appDbContext;
 
-    public async Task<IEnumerable<Character>> GetAsync() =>
+    public async Task<IEnumerable<Character>>? GetAsync() =>
           await _appDbContext.Characters
           .AsNoTracking()
           .ToListAsync();

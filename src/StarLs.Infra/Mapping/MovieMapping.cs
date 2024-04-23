@@ -34,7 +34,7 @@ public class MovieMapping : IEntityTypeConfiguration<Movie>
 
         builder.Property(x => x.Producer)
             .IsRequired()
-            .HasColumnName("Director")
+            .HasColumnName("Producer") // tava director
             .HasColumnType("VARCHAR(100)");
 
         builder.Property(x => x.ReleaseDate)

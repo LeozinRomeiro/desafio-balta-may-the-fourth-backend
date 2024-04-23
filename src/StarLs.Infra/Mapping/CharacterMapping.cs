@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StarLs.Core.Entities;
-using System.Reflection.Emit;
 
 namespace StarLs.Infra.Mapping;
 public class CharacterMapping : IEntityTypeConfiguration<Character>
