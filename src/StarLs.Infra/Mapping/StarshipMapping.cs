@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StarLs.Core.Entities;
-using System.Reflection.Emit;
 
 namespace StarLs.Infra.Mapping;
 public class StarshipMapping : IEntityTypeConfiguration<Starship>
@@ -20,7 +19,7 @@ public class StarshipMapping : IEntityTypeConfiguration<Starship>
 
         builder.Property(x => x.Model)
             .IsRequired()
-            .HasColumnName("Name")
+            .HasColumnName("Model") //tava name
             .HasColumnType("VARCHAR(100)");
 
         builder.Property(x => x.Manufacturer)

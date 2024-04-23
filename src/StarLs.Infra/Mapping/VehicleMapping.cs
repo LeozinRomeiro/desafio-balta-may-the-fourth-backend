@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StarLs.Core.Entities;
-using System.Reflection.Emit;
 
 namespace StarLs.Infra.Mapping;
 public class VehicleMapping : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
-        builder.ToTable("Starship");
+        builder.ToTable("Vehicle"); //tava starship
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
@@ -20,7 +19,7 @@ public class VehicleMapping : IEntityTypeConfiguration<Vehicle>
 
         builder.Property(x => x.Model)
             .IsRequired()
-            .HasColumnName("Name")
+            .HasColumnName("Model") //tava name
             .HasColumnType("VARCHAR(100)");
 
         builder.Property(x => x.Manufacturer)

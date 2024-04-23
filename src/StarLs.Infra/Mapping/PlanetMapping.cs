@@ -19,7 +19,7 @@ public class PlanetMapping : IEntityTypeConfiguration<Planet>
 
         builder.Property(x => x.RotationPeriod)
             .IsRequired()
-            .HasColumnName("Name")
+            .HasColumnName("RotationPeriod") //tava name
             .HasColumnType("VARCHAR(100)");
 
         builder.Property(x => x.OrbitalPeriod)
@@ -54,7 +54,7 @@ public class PlanetMapping : IEntityTypeConfiguration<Planet>
 
         builder.Property(x => x.Population)
             .IsRequired()
-            .HasColumnName("Name")
+            .HasColumnName("Population")
             .HasColumnType("VARCHAR(100)");
 
         //builder.HasMany(p => p.Characters)
