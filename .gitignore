@@ -482,3 +482,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+/src/StarLs.Api/Migrations/20240420163129_FirstMigration.cs
+/src/StarLs.Api/Migrations/20240420163129_FirstMigration.Designer.cs
+/src/StarLs.Api/Migrations/AppDbContextModelSnapshot.cs
+/src/StarLs.Api/Migrations/20240420173124_FinalMigration.cs
+/src/StarLs.Api/Migrations/20240420173124_FinalMigration.Designer.cs
