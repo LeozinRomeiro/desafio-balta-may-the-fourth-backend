@@ -40,7 +40,7 @@ public static class Configurations
     {
         //queries
         builder.Services.AddScoped<IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>>, GetCharacterQueryHandler>();
-        builder.Services.AddScoped<IHandler<GetMovieQueryResquest, List<GetMovieQueryResponse>>, GetMovieQueryHandler>();
+        builder.Services.AddScoped<IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>>, GetMovieQueryHandler>();
         builder.Services.AddScoped<IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>>, GetPlanetQueryHandler>();
         builder.Services.AddScoped<IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>>, GetStarshipQueryHandler>();
         builder.Services.AddScoped<IHandler<GetVehicleQueryRequest, List<GetVehicleQueryResponse>>, GetVehicleQueryHandler>();
