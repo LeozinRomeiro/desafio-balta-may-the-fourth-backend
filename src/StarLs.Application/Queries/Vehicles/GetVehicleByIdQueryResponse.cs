@@ -1,4 +1,5 @@
-﻿using StarLs.Core.Entities;
+﻿using StarLs.Application.Dto;
+using StarLs.Core.Entities;
 
 namespace StarLs.Application.Queries.Vehicles;
 
@@ -16,5 +17,5 @@ public class GetVehicleByIdQueryResponse
     public string CargoCapacity { get; private set; } = null!;
     public string Consumables { get; private set; } = null!;
     public string Class { get; private set; } = null!;
-    public List<Movie> Movies { get; private set; } = null!;
+    public List<MovieDto> Movies { get; private set; } = null!;
 }
