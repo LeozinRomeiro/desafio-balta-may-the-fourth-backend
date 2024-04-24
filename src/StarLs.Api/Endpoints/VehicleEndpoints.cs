@@ -13,7 +13,7 @@ namespace StarLs.Api.Endpoints
                 return Results.Ok(handler.Send(new GetVehicleQueryRequest()));
             });
 
-            app.MapGet("/vehicles/{id}", ([FromServices] IHandler<GetVehicleByIdQueryRequest, List<GetVehicleByIdQueryResponse>> handler,[FromRoute] short id) =>
+            app.MapGet("/vehicles/{id}", ([FromServices] IHandler<GetVehicleByIdQueryRequest, GetVehicleByIdQueryResponse> handler,[FromRoute] short id) =>
             {
                 return Results.Ok(handler.Send(new GetVehicleByIdQueryRequest(id)));
             });

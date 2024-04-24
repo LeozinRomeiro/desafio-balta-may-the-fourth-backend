@@ -13,7 +13,7 @@ namespace StarLs.Api.Endpoints
                 return Results.Ok(handler.Send(new GetPlanetQueryRequest()));
             });
 
-            app.MapGet("/planets/{id}", ([FromServices] IHandler<GetPlanetByIdQueryRequest, List<GetPlanetByIdQueryResponse>> handler,[FromRoute] short id) =>
+            app.MapGet("/planets/{id}", ([FromServices] IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse> handler,[FromRoute] short id) =>
             {
                 return Results.Ok(handler.Send(new GetPlanetByIdQueryRequest(id)));
             });
