@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using StarLs.Api.Endpoints;
 using StarLs.Api.Extensions;
 using StarLs.Application.Queries.Characters;
 using StarLs.Application.Queries.Movies;
+using StarLs.Core.Entities;
 using StarLs.Core.Handlers.Interface;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureDatabase();
@@ -17,15 +20,6 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/characters", ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler) =>
-{
-    return Results.Ok(handler.Send(new GetCharacterQueryRequest()));
-});
-
-app.MapGet("/movies", ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler) =>
-{
-    return Results.Ok(handler.Send(new GetMovieByIdQueryRequest(1)));
-});
-
+app.MapEndpoints();
 
 app.Run();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StarLs.Api.Endpoints;
 using StarLs.Application.Mappings;
 using StarLs.Application.Queries.Characters;
 using StarLs.Application.Queries.Movies;
@@ -50,6 +51,15 @@ public static class Configurations
         builder.Services.AddScoped<IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse>, GetPlanetByIdQueryHandler>();
         builder.Services.AddScoped<IHandler<GetStarshipByIdQueryRequest, GetStarshipByIdQueryResponse>, GetStarshipByIdQueryHandler>();
         builder.Services.AddScoped<IHandler<GetVehicleByIdQueryRequest, GetVehicleByIdQueryResponse>, GetVehicleByIdQueryHandler>();
-    }   
+    }
 
+    public static void MapEndpoints(this WebApplication app)
+    {
+        app.MapCharacterRoutes();
+        app.MapMovieRoutes();
+        app.MapPlanetRoutes();
+        app.MapStarshipRoutes();
+        app.MapVehicleRoutes();
+
+    }
 }
