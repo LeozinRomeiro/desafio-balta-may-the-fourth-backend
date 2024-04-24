@@ -1,4 +1,5 @@
-﻿using StarLs.Core.Entities;
+﻿using StarLs.Application.Dto;
+using StarLs.Core.Entities;
 
 namespace StarLs.Application.Queries.Starships;
 
@@ -14,6 +15,6 @@ public class GetStarshipByIdQueryResponse
     public string Terrain { get; private set; } = null!;
     public string SurfaceWater { get; private set; } = null!;
     public string Population { get; private set; } = null!;
-    public List<Character> Characters { get; private set; } = null!;
-    public List<Movie> Movies { get; private set; } = null!;
+    public List<CharacterDto> Characters { get; private set; } = null!;
+    public List<MovieDto> Movies { get; private set; } = null!;
 }

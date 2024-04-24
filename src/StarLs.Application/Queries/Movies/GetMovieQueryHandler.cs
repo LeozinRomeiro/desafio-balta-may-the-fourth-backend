@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using StarLs.Core.Exceptions;
 using StarLs.Core.Handlers.Interface;
 using StarLs.Core.Repositories.Interfaces;
+using System.Data.Common;
 
 namespace StarLs.Application.Queries.Movies;
 
@@ -17,8 +19,22 @@ public class GetMovieQueryHandler : IHandler<GetMovieQueryRequest, List<GetMovie
 
     public async Task<List<GetMovieQueryResponse>> Send(GetMovieQueryRequest request)
     {
-        var data = await _movieRepository.GetAsync();
-        List<GetMovieQueryResponse>? response = _mapper.Map<List<GetMovieQueryResponse>>(data);
+
+        List<GetMovieQueryResponse>? response;
+
+        try
+        {
+            var data = await _movieRepository.GetAsync();
+            response = _mapper.Map<List<GetMovieQueryResponse>>(data);
+        }
+        catch (DbException ex)
+        {
+            throw new DatabaseException(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
 
         return response;
     }

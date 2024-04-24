@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StarLs.Application.Dto;
 using StarLs.Application.Queries.Characters;
 using StarLs.Application.Queries.Movies;
 using StarLs.Application.Queries.Planets;
@@ -26,5 +27,11 @@ public class AutoMapperProfile : Profile
 
         CreateMap<GetVehicleQueryHandler, Vehicle>().ReverseMap();
         CreateMap<GetVehicleByIdQueryHandler, Vehicle>().ReverseMap();
+
+        CreateMap<Character, CharacterDto>().ReverseMap();
+        CreateMap<Movie, MovieDto>().ReverseMap();
+        CreateMap<Planet, PlanetDto>().ReverseMap();
+        CreateMap<Starship, StarshipDto>().ReverseMap();
+        CreateMap<Vehicle, VehicleDto>().ReverseMap();
     }
 }
