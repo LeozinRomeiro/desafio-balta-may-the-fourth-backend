@@ -6,7 +6,7 @@ using System.Data.Common;
 
 namespace StarLs.Application.Queries.Movies;
 
-public class GetMovieQueryHandler : IHandler<GetMovieQueryResquest, List<GetMovieQueryResponse>>
+public class GetMovieQueryHandler : IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>>
 {
     private readonly IMovieRepository _movieRepository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ public class GetMovieQueryHandler : IHandler<GetMovieQueryResquest, List<GetMovi
         _mapper = mapper;
     }
 
-    public async Task<List<GetMovieQueryResponse>> Send(GetMovieQueryResquest request)
+    public async Task<List<GetMovieQueryResponse>> Send(GetMovieQueryRequest request)
     {
 
         List<GetMovieQueryResponse>? response;

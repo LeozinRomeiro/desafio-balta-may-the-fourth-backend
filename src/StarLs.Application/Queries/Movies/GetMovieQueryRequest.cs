@@ -1,5 +1,5 @@
 ﻿namespace StarLs.Application.Queries.Movies;
 
-public class GetMovieQueryResquest
+public class GetMovieQueryRequest
 {
 }

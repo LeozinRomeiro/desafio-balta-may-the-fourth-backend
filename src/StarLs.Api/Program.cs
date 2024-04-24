@@ -1,4 +1,11 @@
+using Microsoft.AspNetCore.Mvc;
+using StarLs.Api.Endpoints;
 using StarLs.Api.Extensions;
+using StarLs.Application.Queries.Characters;
+using StarLs.Application.Queries.Movies;
+using StarLs.Core.Entities;
+using StarLs.Core.Handlers.Interface;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureDatabase();
@@ -11,9 +18,8 @@ builder.ConfigureHandlers();
 
 var app = builder.Build();
 
-//add middleware exception
-app.UseExceptionMiddleware();
-
 app.MapGet("/", () => "Hello World!");
+
+app.MapEndpoints();
 
 app.Run();
