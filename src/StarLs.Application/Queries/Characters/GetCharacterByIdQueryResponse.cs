@@ -1,4 +1,5 @@
-﻿using StarLs.Core.Entities;
+﻿using StarLs.Application.Dto;
+using StarLs.Core.Entities;
 
 namespace StarLs.Application.Queries.Characters;
 
@@ -13,6 +14,6 @@ public class GetCharacterByIdQueryResponse
     public string BirthYear { get; private set; } = null!;
     public string Gender { get; private set; } = null!;
     public short PlanetId { get; set; }
-    public Planet Planet { get; private set; } = null!;
-    public List<Movie> Movies { get; private set; } = null!;
+    public PlanetDto Planet { get; private set; } = null!;
+    public List<MovieDto> Movies { get; private set; } = null!;
 }

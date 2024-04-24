@@ -45,7 +45,7 @@ public class ExceptionMiddleware
         => exception switch
         {
             BadRequestException => StatusCodes.Status400BadRequest,
-            NotFoundException => StatusCodes.Status404NotFound,
+            EntityNotFoundException => StatusCodes.Status404NotFound,
             AutoMapperMappingException => StatusCodes.Status501NotImplemented,
             DatabaseException => StatusCodes.Status503ServiceUnavailable,
             _ => StatusCodes.Status500InternalServerError,

@@ -2,6 +2,7 @@
 using StarLs.Core.Exceptions;
 using StarLs.Core.Handlers.Interface;
 using StarLs.Core.Repositories.Interfaces;
+using System.Data.Common;
 
 namespace StarLs.Application.Queries.Movies;
 
@@ -22,16 +23,24 @@ public class GetMovieByIdQueryHandler : IHandler<GetMovieByIdQueryRequest, GetMo
         try
         {
             var data = await _movieRepository.GetByIdAsync(request.Id);
+
+            if (data == null)
+                throw new EntityNotFoundException("Entity Not Found");
+
             response = _mapper.Map<GetMovieByIdQueryResponse>(data);
-
-            if(response == null)
-                throw new NotFoundException("Entidade nao encontrada");
-
         }
-        catch (NotFoundException ex)
+        catch (DbException ex)
         {
-            throw new NotFoundException(ex.Message);
-        }       
+            throw new DatabaseException(ex.Message);
+        }
+        catch (EntityNotFoundException ex)
+        {
+            throw new EntityNotFoundException(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
 
         return response;
     }

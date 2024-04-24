@@ -23,18 +23,24 @@ public class GetCharacterByIdQueryHandler : IHandler<GetCharacterByIdQueryReques
         try
         {
             var data = await _characterRepository.GetByIdAsync(request.Id);
+
+            if (data == null)
+                throw new EntityNotFoundException("Entity Not found");
+
             response = _mapper.Map<GetCharacterByIdQueryResponse>(data);
 
-            if(response == null)
-                throw new NotFoundException("Entity Not found");
         }
         catch (DbException ex)
         {
             throw new DatabaseException(ex.Message);
         }
+        catch (EntityNotFoundException ex)
+        {
+            throw new EntityNotFoundException(ex.Message);
+        }
         catch (Exception ex)
         {
-            throw new Exception();
+            throw new Exception(ex.Message);
         }
 
         return response;
