@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StarLs.Core.Exceptions;
 using StarLs.Core.Handlers.Interface;
 using StarLs.Core.Repositories.Interfaces;
 
@@ -17,9 +18,20 @@ public class GetMovieByIdQueryHandler : IHandler<GetMovieByIdQueryRequest, GetMo
 
     public async Task<GetMovieByIdQueryResponse> Send(GetMovieByIdQueryRequest request)
     {
-        var data = await _movieRepository.GetByIdAsync(request.Id);
+        GetMovieByIdQueryResponse? response;
+        try
+        {
+            var data = await _movieRepository.GetByIdAsync(request.Id);
+            response = _mapper.Map<GetMovieByIdQueryResponse>(data);
 
-        GetMovieByIdQueryResponse? response = _mapper.Map<GetMovieByIdQueryResponse>(data);
+            if(response == null)
+                throw new NotFoundException("Entidade nao encontrada");
+
+        }
+        catch (NotFoundException ex)
+        {
+            throw new NotFoundException(ex.Message);
+        }       
 
         return response;
     }

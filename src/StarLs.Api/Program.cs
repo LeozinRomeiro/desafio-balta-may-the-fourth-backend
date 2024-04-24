@@ -15,16 +15,22 @@ builder.ConfigureHandlers();
 
 var app = builder.Build();
 
+//add middleware exception
+app.UseExceptionMiddleware();
+
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/characters", ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler) =>
+app.MapGet("/characters", async ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler) =>
 {
-    return Results.Ok(handler.Send(new GetCharacterQueryRequest()));
+    var result = await handler.Send(new GetCharacterQueryRequest());
+    return Results.Ok(result);
 });
 
-app.MapGet("/movies", ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler) =>
+// Altere a definição da rota /movies
+app.MapGet("/movies", async ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler) =>
 {
-    return Results.Ok(handler.Send(new GetMovieByIdQueryRequest(1)));
+    var result = await handler.Send(new GetMovieByIdQueryRequest(1));
+    return Results.Ok(result);
 });
 
 

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using StarLs.Core.Exceptions;
 using StarLs.Core.Handlers.Interface;
 using StarLs.Core.Repositories.Interfaces;
+using System.Data.Common;
 
 namespace StarLs.Application.Queries.Characters;
 
@@ -17,9 +19,23 @@ public class GetCharacterByIdQueryHandler : IHandler<GetCharacterByIdQueryReques
 
     public async Task<GetCharacterByIdQueryResponse> Send(GetCharacterByIdQueryRequest request)
     {
-        var data = await _characterRepository.GetByIdAsync(request.Id);
+        GetCharacterByIdQueryResponse? response;
+        try
+        {
+            var data = await _characterRepository.GetByIdAsync(request.Id);
+            response = _mapper.Map<GetCharacterByIdQueryResponse>(data);
 
-        GetCharacterByIdQueryResponse? response = _mapper.Map<GetCharacterByIdQueryResponse>(data);
+            if(response == null)
+                throw new NotFoundException("Entity Not found");
+        }
+        catch (DbException ex)
+        {
+            throw new DatabaseException(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception();
+        }
 
         return response;
     }
