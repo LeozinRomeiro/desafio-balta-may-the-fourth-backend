@@ -487,3 +487,5 @@ $RECYCLE.BIN/
 /src/StarLs.Api/Migrations/AppDbContextModelSnapshot.cs
 /src/StarLs.Api/Migrations/20240420173124_FinalMigration.cs
 /src/StarLs.Api/Migrations/20240420173124_FinalMigration.Designer.cs
+/src/StarLs.Api/app.db
+/src/StarLs.Api/Migrations/20240424002707_CreateDatabase.cs
