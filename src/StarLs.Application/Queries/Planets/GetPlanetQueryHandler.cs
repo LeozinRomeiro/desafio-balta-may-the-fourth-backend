@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using StarLs.Core.Exceptions;
 using StarLs.Core.Handlers.Interface;
 using StarLs.Core.Repositories.Interfaces;
+using System.Data.Common;
 
 namespace StarLs.Application.Queries.Planets;
 
@@ -17,8 +19,21 @@ public class GetPlanetQueryHandler : IHandler<GetPlanetQueryRequest, List<GetPla
 
     public async Task<List<GetPlanetQueryResponse>> Send(GetPlanetQueryRequest request)
     {
-        var data = await _planetRepository.GetAsync();
-        List<GetPlanetQueryResponse>? response = _mapper.Map<List<GetPlanetQueryResponse>>(data);
+        
+        List<GetPlanetQueryResponse>? response; 
+        try
+        {
+            var data = await _planetRepository.GetAsync();
+            response = _mapper.Map<List<GetPlanetQueryResponse>>(data);
+        }
+        catch (DbException ex)
+        {
+            throw new DatabaseException(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
 
         return response;
     }
