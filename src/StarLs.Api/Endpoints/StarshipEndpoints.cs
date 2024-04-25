@@ -11,12 +11,14 @@ namespace StarLs.Api.Endpoints
             app.MapGet("/starships", ([FromServices] IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>> handler) =>
             {
                 return Results.Ok(handler.Send(new GetStarshipQueryRequest()));
-            });
+            })
+            .WithTags("Starship");
 
             app.MapGet("/starships/{id}", ([FromServices] IHandler<GetStarshipByIdQueryRequest, GetStarshipByIdQueryResponse> handler,[FromRoute] short id) =>
             {
                 return Results.Ok(handler.Send(new GetStarshipByIdQueryRequest(id)));
-            });
+            })
+            .WithTags("Starship");
         }
     }
 }

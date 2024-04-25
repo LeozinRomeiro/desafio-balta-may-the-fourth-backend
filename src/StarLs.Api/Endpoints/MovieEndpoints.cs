@@ -11,12 +11,14 @@ namespace StarLs.Api.Endpoints
             app.MapGet("/movies", ([FromServices] IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>> handler) =>
             {
                 return Results.Ok(handler.Send(new GetMovieQueryRequest()));
-            });
+            })
+            .WithTags("Movies");
 
             app.MapGet("/movies/{id}", ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler,[FromRoute] short id) =>
             {
                 return Results.Ok(handler.Send(new GetMovieByIdQueryRequest(id)));
-            });
+            })
+            .WithTags("Movies");
         }
     }
 }
