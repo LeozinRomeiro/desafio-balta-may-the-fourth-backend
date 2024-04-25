@@ -11,12 +11,14 @@ namespace StarLs.Api.Endpoints
             app.MapGet("/planets", ([FromServices] IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>> handler) =>
             {
                 return Results.Ok(handler.Send(new GetPlanetQueryRequest()));
-            });
+            })
+            .WithTags("Planets");
 
             app.MapGet("/planets/{id}", ([FromServices] IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse> handler,[FromRoute] short id) =>
             {
                 return Results.Ok(handler.Send(new GetPlanetByIdQueryRequest(id)));
-            });
+            })
+            .WithTags("Planets");
         }
     }
 }
