@@ -60,6 +60,5 @@ public static class Configurations
         app.MapPlanetRoutes();
         app.MapStarshipRoutes();
         app.MapVehicleRoutes();
-
     }
 }
