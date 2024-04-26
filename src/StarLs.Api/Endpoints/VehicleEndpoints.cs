@@ -8,15 +8,17 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapVehicleRoutes(this WebApplication app)
         {
-            app.MapGet("/vehicles", ([FromServices] IHandler<GetVehicleQueryRequest, List<GetVehicleQueryResponse>> handler) =>
+            app.MapGet("/vehicles", async ([FromServices] IHandler<GetVehicleQueryRequest, List<GetVehicleQueryResponse>> handler) =>
             {
-                return Results.Ok(handler.Send(new GetVehicleQueryRequest()));
+                var result = await handler.Send(new GetVehicleQueryRequest());
+                return Results.Ok(result);
             })
             .WithTags("Vehicle");
 
-            app.MapGet("/vehicles/{id}", ([FromServices] IHandler<GetVehicleByIdQueryRequest, GetVehicleByIdQueryResponse> handler,[FromRoute] short id) =>
+            app.MapGet("/vehicles/{id}", async ([FromServices] IHandler<GetVehicleByIdQueryRequest, GetVehicleByIdQueryResponse> handler,[FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetVehicleByIdQueryRequest(id)));
+                var result = await handler.Send(new GetVehicleByIdQueryRequest(id));
+                return Results.Ok(result);
             })
             .WithTags("Vehicle");
         }
