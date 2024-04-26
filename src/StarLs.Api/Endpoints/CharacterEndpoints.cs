@@ -8,15 +8,17 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapCharacterRoutes(this WebApplication app)
         {
-            app.MapGet("/characters", ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler) =>
+            app.MapGet("/characters", async ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler) =>
             {
-                return Results.Ok(handler.Send(new GetCharacterQueryRequest()));
+                var result = await handler.Send(new GetCharacterQueryRequest());
+                return Results.Ok(result);
             })
             .WithTags("Character");
 
-            app.MapGet("/characters/{id}", ([FromServices] IHandler<GetCharacterByIdQueryRequest, GetCharacterByIdQueryResponse> handler, [FromRoute] short id) =>
+            app.MapGet("/characters/{id}", async ([FromServices] IHandler<GetCharacterByIdQueryRequest, GetCharacterByIdQueryResponse> handler, [FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetCharacterByIdQueryRequest(id)));
+                var result = await handler.Send(new GetCharacterByIdQueryRequest(id));
+                return Results.Ok(result);
             })
             .WithTags("Character");
         }

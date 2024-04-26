@@ -8,15 +8,17 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapPlanetRoutes(this WebApplication app)
         {
-            app.MapGet("/planets", ([FromServices] IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>> handler) =>
+            app.MapGet("/planets", async ([FromServices] IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>> handler) =>
             {
-                return Results.Ok(handler.Send(new GetPlanetQueryRequest()));
+                var result = await  handler.Send(new GetPlanetQueryRequest());
+                return Results.Ok(result);
             })
             .WithTags("Planets");
 
-            app.MapGet("/planets/{id}", ([FromServices] IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse> handler,[FromRoute] short id) =>
+            app.MapGet("/planets/{id}", async ([FromServices] IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse> handler,[FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetPlanetByIdQueryRequest(id)));
+                var result = await handler.Send(new GetPlanetByIdQueryRequest(id));
+                return Results.Ok(result);
             })
             .WithTags("Planets");
         }

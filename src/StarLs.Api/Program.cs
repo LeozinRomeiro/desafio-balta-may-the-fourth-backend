@@ -25,6 +25,7 @@ builder.ConfigureHandlers();
 var app = builder.Build();
 
 app.MapEndpoints();
+app.UseExceptionMiddleware();
 
 app.UseSwagger();
 app.UseSwaggerUI();
