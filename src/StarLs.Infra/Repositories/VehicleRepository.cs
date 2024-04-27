@@ -13,10 +13,12 @@ public class VehicleRepository : IVehicleRepository
 
     public async Task<IEnumerable<Vehicle>> GetAsync() =>
             await _appDbContext.Vehicles
-            .AsNoTracking()
-            .ToListAsync();
+                .Include(x => x.Movies)
+                .AsNoTracking()
+                .ToListAsync();
 
     public async Task<Vehicle?> GetByIdAsync(short id) =>
            await _appDbContext.Vehicles
-           .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.Movies)
+                .FirstOrDefaultAsync(x => x.Id == id);
 }
