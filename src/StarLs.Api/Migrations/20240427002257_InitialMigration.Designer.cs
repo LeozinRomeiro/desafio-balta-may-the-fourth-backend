@@ -10,14 +10,14 @@ using StarLs.Infra.Context;
 namespace StarLs.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240424002707_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20240427002257_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
             modelBuilder.Entity("CharacterMovie", b =>
                 {
@@ -194,7 +194,7 @@ namespace StarLs.Api.Migrations
                     b.Property<string>("Gravity")
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)")
-                        .HasColumnName("Graviry");
+                        .HasColumnName("Gravity");
 
                     b.Property<string>("Name")
                         .IsRequired()
