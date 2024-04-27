@@ -8,13 +8,13 @@ public static class MockPlanet
         var list = new List<Planet>
         {
             new Planet(1, "Tatooine", "23", "304", "10465", "Arid", 
-            "1 standard", "Desert", "1", "200000", MockCharacter.Builder(), MockMovies.Builder()),
+            "1 standard", "Desert", "1", "200000"),
 
             new Planet(2, "Alderaan", "24", "364", "12500", "Temperate", 
-            "1 standard", "Grasslands, Mountains", "40", "2000000000", MockCharacter.Builder(), MockMovies.Builder()),
+            "1 standard", "Grasslands, Mountains", "40", "2000000000"),
 
             new Planet(3, "Dagobah", "23", "341", "8900", "Murky", 
-            "N/A", "Swamp, Jungles", "8", "unknown", MockCharacter.Builder(), MockMovies.Builder())
+            "N/A", "Swamp, Jungles", "8", "unknown")
         };
 
         return list;
