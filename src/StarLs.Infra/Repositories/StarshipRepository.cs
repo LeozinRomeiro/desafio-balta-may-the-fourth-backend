@@ -13,10 +13,12 @@ public class StarshipRepository : IStarshipRepository
 
     public async Task<IEnumerable<Starship>> GetAsync() =>
             await _appDbContext.Starships
-            .AsNoTracking()
-            .ToListAsync();
+                .Include(x => x.Movies)
+                .AsNoTracking()
+                .ToListAsync();
 
     public async Task<Starship?> GetByIdAsync(short id) =>
            await _appDbContext.Starships
-           .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.Movies)
+                .FirstOrDefaultAsync(x => x.Id == id);
 }
