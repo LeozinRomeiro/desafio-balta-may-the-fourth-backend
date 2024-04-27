@@ -16,5 +16,25 @@
         public string Consumables { get; private set; } = null !;
         public string Class { get; private set; } = null !;
         public List<Movie> Movies { get; private set; } = null !;
+
+        public Starship(short id, string name, string model, string manufacturer, string costInCredits, string length, 
+            string maxSpeed, string crew, string passengers, string cargoCapacity, string hyperdriveRating, 
+            string mglt, string consumables, string @class)
+        {
+            Id = id;
+            Name = name;
+            Model = model;
+            Manufacturer = manufacturer;
+            CostInCredits = costInCredits;
+            Length = length;
+            MaxSpeed = maxSpeed;
+            Crew = crew;
+            Passengers = passengers;
+            CargoCapacity = cargoCapacity;
+            HyperdriveRating = hyperdriveRating;
+            Mglt = mglt;
+            Consumables = consumables;
+            Class = @class;
+        }
     }
 }
