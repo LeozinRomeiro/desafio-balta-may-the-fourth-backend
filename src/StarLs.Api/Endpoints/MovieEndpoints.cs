@@ -8,15 +8,19 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapMovieRoutes(this WebApplication app)
         {
-            app.MapGet("/movies", ([FromServices] IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>> handler) =>
+            app.MapGet("/movies", async ([FromServices] IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>> handler) =>
             {
-                return Results.Ok(handler.Send(new GetMovieQueryRequest()));
-            });
+                var result = await handler.Send(new GetMovieQueryRequest());
+                return Results.Ok(result);
+            })
+            .WithTags("Movies");
 
-            app.MapGet("/movies/{id}", ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler,[FromRoute] short id) =>
+            app.MapGet("/movies/{id}", async ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler,[FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetMovieByIdQueryRequest(id)));
-            });
+                var result = await handler.Send(new GetMovieByIdQueryRequest(id));
+                return Results.Ok(result);
+            })
+            .WithTags("Movies");
         }
     }
 }

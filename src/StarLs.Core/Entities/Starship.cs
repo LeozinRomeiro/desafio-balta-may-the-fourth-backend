@@ -17,10 +17,9 @@
         public string Class { get; private set; } = null !;
         public List<Movie> Movies { get; private set; } = null !;
 
-        public Starship(short id, string name, string model, string manufacturer,
-                        string costInCredits, string length, string maxSpeed, string crew,
-                        string passengers, string cargoCapacity, string hyperdriveRating,
-                        string mglt, string consumables, string @class, List<Movie> movies)
+        public Starship(short id, string name, string model, string manufacturer, string costInCredits, string length, 
+            string maxSpeed, string crew, string passengers, string cargoCapacity, string hyperdriveRating, 
+            string mglt, string consumables, string @class)
         {
             Id = id;
             Name = name;
@@ -36,7 +35,6 @@
             Mglt = mglt;
             Consumables = consumables;
             Class = @class;
-            Movies = movies;
         }
     }
 }

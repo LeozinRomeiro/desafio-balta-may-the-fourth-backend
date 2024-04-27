@@ -13,9 +13,8 @@
         public List<Vehicle> Vehicles { get; private set; } = null !;
         public List<Starship> Starships { get; private set; } = null !;
 
-        public Movie(short id, string title, short episode, string openingCrawl, string director,
-                    string producer, string releaseDate, List<Character> characters, List<Planet> planets,
-                    List<Vehicle> vehicles, List<Starship> starships)
+        public Movie(short id, string title, short episode, string openingCrawl, string director, string producer, 
+            string releaseDate)
         {
             Id = id;
             Title = title;
@@ -24,10 +23,6 @@
             Director = director;
             Producer = producer;
             ReleaseDate = releaseDate;
-            Characters = characters;
-            Planets = planets;
-            Vehicles = vehicles;
-            Starships = starships;
         }
     }
 }

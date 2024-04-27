@@ -13,10 +13,18 @@ public class MovieRepository : IMovieRepository
     
     public async Task<IEnumerable<Movie>> GetAsync() =>
         await _appDbContext.Movies
+            .Include(x => x.Characters)
+            .Include(x => x.Planets)
+            .Include(x => x.Vehicles)
+            .Include(x => x.Starships)
             .AsNoTracking()
             .ToListAsync();
     
     public async Task<Movie?> GetByIdAsync(short id) =>
         await _appDbContext.Movies
+            .Include(x => x.Characters)
+            .Include(x => x.Planets)
+            .Include(x => x.Vehicles)
+            .Include(x => x.Starships)
             .FirstOrDefaultAsync(x => x.Id == id);
 }

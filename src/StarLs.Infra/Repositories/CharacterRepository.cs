@@ -13,10 +13,14 @@ public class CharacterRepository : ICharacterRepository
 
     public async Task<IEnumerable<Character>>? GetAsync() =>
           await _appDbContext.Characters
-          .AsNoTracking()
-          .ToListAsync();
+            .Include(x => x.Planet)
+            .Include(x => x.Movies)
+            .AsNoTracking()
+            .ToListAsync();
 
     public async Task<Character?> GetByIdAsync(short id) =>
           await _appDbContext.Characters
-          .FirstOrDefaultAsync(x => x.Id == id);
+            .Include(x => x.Planet)
+            .Include(x => x.Movies)
+            .FirstOrDefaultAsync(x => x.Id == id);
 }
