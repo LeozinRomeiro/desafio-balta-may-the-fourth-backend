@@ -12,7 +12,7 @@ public class PlanetMapping : IEntityTypeConfiguration<Planet>
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
 
-        builder.Property(x => x.Name)
+        builder.Property(x => x.Title)
             .IsRequired()
             .HasColumnName("Name")
             .HasColumnType("VARCHAR(100)");
@@ -39,7 +39,7 @@ public class PlanetMapping : IEntityTypeConfiguration<Planet>
 
         builder.Property(x => x.Gravity)
             .IsRequired()
-            .HasColumnName("Graviry")
+            .HasColumnName("Gravity")
             .HasColumnType("VARCHAR(100)");
 
         builder.Property(x => x.Terrain)

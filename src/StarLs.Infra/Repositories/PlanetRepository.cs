@@ -13,10 +13,14 @@ public class PlanetRepository : IPlanetRepository
 
     public async Task<IEnumerable<Planet>> GetAsync() =>
         await _appDbContext.Planets
-        .AsNoTracking()
-        .ToListAsync();
+            .Include(x => x.Characters)
+            .Include(x => x.Movies)
+            .AsNoTracking()
+            .ToListAsync();
 
     public async Task<Planet?> GetByIdAsync(short id) =>
            await _appDbContext.Planets
-           .FirstOrDefaultAsync(x => x.Id == id);
+            .Include(x => x.Characters)
+            .Include(x => x.Movies)
+            .FirstOrDefaultAsync(x => x.Id == id);
 }
