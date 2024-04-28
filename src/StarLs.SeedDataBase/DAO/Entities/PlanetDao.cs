@@ -23,7 +23,7 @@ internal class PlanetDao(ILogger logger)
         {
             var queryBuiler = new StringBuilder();
             queryBuiler.Append("INSERT INTO Planet (Name, RotationPeriod, OrbitalPeriod, Diameter, Climate, Gravity, Terrain, SurfaceWater, Population) VALUES ");
-            queryBuiler.Append("(@Title, @RotationPeriod, @OrbitalPeriod, @Diameter, @Climate, @Gravity, @Terrain, @SurfaceWater, @Population)");
+            queryBuiler.Append("(@Name, @RotationPeriod, @OrbitalPeriod, @Diameter, @Climate, @Gravity, @Terrain, @SurfaceWater, @Population)");
 
             using (_conn = new SqliteDbConnection().GetConnection())
             {
