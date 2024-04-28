@@ -45,9 +45,4 @@ public class GetVehicleByIdQueryHandler : IHandler<GetVehicleByIdQueryRequest, G
 
         return response;
     }
-
-    public Task<GetVehicleByIdQueryResponse> Send(GetVehicleByIdQueryRequest request, int skip, int take)
-    {
-        throw new NotImplementedException();
-    }
 }
