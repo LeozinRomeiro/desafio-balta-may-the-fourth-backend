@@ -38,4 +38,9 @@ public class GetMovieQueryHandler : IHandler<GetMovieQueryRequest, List<GetMovie
 
         return response;
     }
+
+    public Task<List<GetMovieQueryResponse>> Send(GetMovieQueryRequest request, int skip, int take)
+    {
+        throw new NotImplementedException();
+    }
 }

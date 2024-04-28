@@ -45,4 +45,9 @@ public class GetCharacterByIdQueryHandler : IHandler<GetCharacterByIdQueryReques
 
         return response;
     }
+
+    public Task<GetCharacterByIdQueryResponse> Send(GetCharacterByIdQueryRequest request, int skip, int take)
+    {
+        throw new NotImplementedException();
+    }
 }

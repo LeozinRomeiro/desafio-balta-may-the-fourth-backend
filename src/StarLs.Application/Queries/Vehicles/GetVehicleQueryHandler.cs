@@ -41,4 +41,9 @@ public class GetVehicleQueryHandler : IHandler<GetVehicleQueryRequest, List<GetV
 
         return response;
     }
+
+    public Task<List<GetVehicleQueryResponse>> Send(GetVehicleQueryRequest request, int skip, int take)
+    {
+        throw new NotImplementedException();
+    }
 }

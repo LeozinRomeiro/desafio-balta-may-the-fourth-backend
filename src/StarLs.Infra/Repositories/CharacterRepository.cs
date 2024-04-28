@@ -11,10 +11,12 @@ public class CharacterRepository : ICharacterRepository
     public CharacterRepository(AppDbContext appDbContext) =>
         _appDbContext = appDbContext;
 
-    public async Task<IEnumerable<Character>>? GetAsync() =>
+    public async Task<IEnumerable<Character>>? GetAsync(int skip, int take) =>
           await _appDbContext.Characters
             .Include(x => x.Planet)
             .Include(x => x.Movies)
+            .Skip(skip)
+            .Take(take)
             .AsNoTracking()
             .ToListAsync();
 

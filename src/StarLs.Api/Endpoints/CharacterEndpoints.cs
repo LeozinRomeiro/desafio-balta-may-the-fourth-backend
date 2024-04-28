@@ -10,14 +10,14 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapCharacterRoutes(this WebApplication app)
         {
-            app.MapGet("/characters", async ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
+            app.MapGet("/characters", async ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler, [FromServices] IMemoryCache cache, int skip = 0, int take = 1) =>
             {
                 var result = await cache.GetOrCreateAsync("CharactersCache", async item =>
                 {
                     item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
                     item.SlidingExpiration = TimeSpan.FromHours(12);
 
-                    return await handler.Send(new GetCharacterQueryRequest());
+                    return await handler.Send(new GetCharacterQueryRequest(), skip,take);
                 });
 
                 return Results.Ok(result);

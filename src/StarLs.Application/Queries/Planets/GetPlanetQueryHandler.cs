@@ -37,4 +37,9 @@ public class GetPlanetQueryHandler : IHandler<GetPlanetQueryRequest, List<GetPla
 
         return response;
     }
+
+    public Task<List<GetPlanetQueryResponse>> Send(GetPlanetQueryRequest request, int skip, int take)
+    {
+        throw new NotImplementedException();
+    }
 }

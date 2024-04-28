@@ -46,4 +46,9 @@ public class GetStarshipByIdQueryHandler : IHandler<GetStarshipByIdQueryRequest,
 
         return response;
     }
+
+    public Task<GetStarshipByIdQueryResponse> Send(GetStarshipByIdQueryRequest request, int skip, int take)
+    {
+        throw new NotImplementedException();
+    }
 }

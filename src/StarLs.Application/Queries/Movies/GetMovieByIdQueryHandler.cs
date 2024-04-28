@@ -44,4 +44,9 @@ public class GetMovieByIdQueryHandler : IHandler<GetMovieByIdQueryRequest, GetMo
 
         return response;
     }
+
+    public Task<GetMovieByIdQueryResponse> Send(GetMovieByIdQueryRequest request, int skip, int take)
+    {
+        throw new NotImplementedException();
+    }
 }
