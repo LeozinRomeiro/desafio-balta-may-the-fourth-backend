@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using StarLs.Application.Queries.Vehicles;
 using StarLs.Core.Handlers.Interface;
 
@@ -8,8 +9,13 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapVehicleRoutes(this WebApplication app)
         {
-            app.MapGet("/vehicles", async ([FromServices] IHandler<GetVehicleQueryRequest, List<GetVehicleQueryResponse>> handler) =>
+            app.MapGet("/vehicles", async ([FromServices] IHandler<GetVehicleQueryRequest, List<GetVehicleQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
             {
+                var memoryCache = cache.GetOrCreate("VehiclesCache", item =>
+                {
+                    item.SlidingExpiration = TimeSpan.FromHours(1);
+                    return DateTime.Now;
+                });
                 var result = await handler.Send(new GetVehicleQueryRequest());
                 return Results.Ok(result);
             })
