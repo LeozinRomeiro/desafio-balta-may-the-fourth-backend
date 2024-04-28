@@ -46,8 +46,4 @@ public class GetPlanetByIdQueryHandler : IHandler<GetPlanetByIdQueryRequest, Get
         return response;
     }
 
-    public Task<GetPlanetByIdQueryResponse> Send(GetPlanetByIdQueryRequest request, int skip, int take)
-    {
-        throw new NotImplementedException();
-    }
 }

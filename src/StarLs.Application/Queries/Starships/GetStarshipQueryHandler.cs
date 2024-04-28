@@ -38,8 +38,4 @@ public class GetStarshipQueryHandler : IHandler<GetStarshipQueryRequest, List<Ge
         return response;
     }
 
-    public Task<List<GetStarshipQueryResponse>> Send(GetStarshipQueryRequest request, int skip, int take)
-    {
-        throw new NotImplementedException();
-    }
 }

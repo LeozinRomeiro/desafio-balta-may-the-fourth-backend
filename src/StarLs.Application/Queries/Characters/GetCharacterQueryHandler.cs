@@ -18,12 +18,12 @@ public class GetCharacterQueryHandler : IHandler<GetCharacterQueryRequest, List<
         _mapper = mapper;
     }
 
-    public async Task<List<GetCharacterQueryResponse>> Send(GetCharacterQueryRequest request, int skip, int take)
+    public async Task<List<GetCharacterQueryResponse>> Send(GetCharacterQueryRequest request)
     {
         List<GetCharacterQueryResponse>? response;
         try
         {
-            var data = await _characterRepository.GetAsync(skip,take);
+            var data = await _characterRepository.GetAsync();
             response = _mapper.Map<List<GetCharacterQueryResponse>>(data);
         }
         catch (DbException ex)
@@ -38,8 +38,4 @@ public class GetCharacterQueryHandler : IHandler<GetCharacterQueryRequest, List<
         return response;
     }
 
-    public Task<List<GetCharacterQueryResponse>> Send(GetCharacterQueryRequest request)
-    {
-        throw new NotImplementedException();
-    }
 }
