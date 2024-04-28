@@ -15,7 +15,7 @@ namespace StarLs.Api.Endpoints
                 var result = await cache.GetOrCreateAsync("CharactersCache", async item =>
                 {
                     item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
-                    item.SlidingExpiration = TimeSpan.FromHours(1);
+                    item.SlidingExpiration = TimeSpan.FromHours(12);
 
                     return await handler.Send(new GetCharacterQueryRequest());
                 });

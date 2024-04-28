@@ -13,7 +13,9 @@ namespace StarLs.Api.Endpoints
             {
                 var result = await cache.GetOrCreateAsync("PlanetsCache", async item =>
                 {
-                    item.SlidingExpiration = TimeSpan.FromHours(1);
+                    item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
+                    item.SlidingExpiration = TimeSpan.FromHours(12);
+
                     return await handler.Send(new GetPlanetQueryRequest());
                 });
                 
