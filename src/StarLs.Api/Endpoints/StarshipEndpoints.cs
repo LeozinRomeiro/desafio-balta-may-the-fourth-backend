@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using StarLs.Application.Queries.Starships;
 using StarLs.Core.Handlers.Interface;
 
@@ -8,9 +9,16 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapStarshipRoutes(this WebApplication app)
         {
-            app.MapGet("/starships", async ([FromServices] IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>> handler) =>
+            app.MapGet("/starships", async ([FromServices] IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
             {
-                var result = await handler.Send(new GetStarshipQueryRequest());
+                var result = await cache.GetOrCreateAsync("StarshipsCache", async item =>
+                {
+                    item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
+                    item.SlidingExpiration = TimeSpan.FromHours(12);
+
+                    return await handler.Send(new GetStarshipQueryRequest());
+                });
+                
                 return Results.Ok(result);
             })
             .WithTags("Starship");

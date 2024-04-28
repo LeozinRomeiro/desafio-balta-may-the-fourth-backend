@@ -22,6 +22,8 @@ builder.ConfigureDatabase();
 builder.ConfigureRepositories();
 builder.ConfigureHandlers();
 
+builder.Services.AddMemoryCache();
+
 var app = builder.Build();
 
 app.MapEndpoints();
