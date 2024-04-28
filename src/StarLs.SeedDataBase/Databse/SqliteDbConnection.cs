@@ -16,7 +16,7 @@ internal class SqliteDbConnection : IDbConnection<SQLiteConnection>, IDisposable
     {
         var currentDic = Directory.GetCurrentDirectory();
         var pathDatabase = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(currentDic).ToString()).ToString()).ToString());
-        var _connStr = $"DataSource={Path.Combine(pathDatabase.FullName, "StarLs.Api", "app.db")},version=3;";
+        var _connStr = $"DataSource={Path.Combine(pathDatabase.FullName, "StarLs.Api", "app.db")};version=3;";
 
         _conn = new SQLiteConnection(_connStr);
         _conn.Open();
