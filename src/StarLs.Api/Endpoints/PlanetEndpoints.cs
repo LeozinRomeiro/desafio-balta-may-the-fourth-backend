@@ -11,12 +11,14 @@ namespace StarLs.Api.Endpoints
         {
             app.MapGet("/planets", async ([FromServices] IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
             {
-                var memoryCache = cache.GetOrCreate("PlanetsCache", item =>
+                var result = await cache.GetOrCreateAsync("PlanetsCache", async item =>
                 {
-                    item.SlidingExpiration = TimeSpan.FromHours(1);
-                    return DateTime.Now;
+                    item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
+                    item.SlidingExpiration = TimeSpan.FromHours(12);
+
+                    return await handler.Send(new GetPlanetQueryRequest());
                 });
-                var result = await  handler.Send(new GetPlanetQueryRequest());
+                
                 return Results.Ok(result);
             })
             .WithTags("Planets");
