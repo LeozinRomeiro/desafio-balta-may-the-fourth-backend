@@ -11,12 +11,12 @@ namespace StarLs.Api.Endpoints
         {
             app.MapGet("/movies", async ([FromServices] IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
             {
-                var memoryCache = cache.GetOrCreate("MoviesCache", item =>
+                var result = cache.GetOrCreateAsync("MoviesCache", async item =>
                 {
                     item.SlidingExpiration = TimeSpan.FromHours(1);
-                    return DateTime.Now;
+                    return await handler.Send(new GetMovieQueryRequest()); ;
                 });
-                var result = await handler.Send(new GetMovieQueryRequest());
+                
                 return Results.Ok(result);
             })
             .WithTags("Movies");

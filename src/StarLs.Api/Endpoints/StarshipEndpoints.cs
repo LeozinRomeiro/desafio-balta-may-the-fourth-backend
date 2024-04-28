@@ -11,12 +11,12 @@ namespace StarLs.Api.Endpoints
         {
             app.MapGet("/starships", async ([FromServices] IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
             {
-                var memoryCache = cache.GetOrCreate("StarshipsCache", item =>
+                var result = await cache.GetOrCreateAsync("StarshipsCache", async item =>
                 {
                     item.SlidingExpiration = TimeSpan.FromHours(1);
-                    return DateTime.Now;
+                    return await handler.Send(new GetStarshipQueryRequest());
                 });
-                var result = await handler.Send(new GetStarshipQueryRequest());
+                
                 return Results.Ok(result);
             })
             .WithTags("Starship");

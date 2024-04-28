@@ -11,12 +11,12 @@ namespace StarLs.Api.Endpoints
         {
             app.MapGet("/vehicles", async ([FromServices] IHandler<GetVehicleQueryRequest, List<GetVehicleQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
             {
-                var memoryCache = cache.GetOrCreate("VehiclesCache", item =>
+                var result = await cache.GetOrCreateAsync("VehiclesCache", async item =>
                 {
                     item.SlidingExpiration = TimeSpan.FromHours(1);
-                    return DateTime.Now;
+                    return await handler.Send(new GetVehicleQueryRequest());
                 });
-                var result = await handler.Send(new GetVehicleQueryRequest());
+
                 return Results.Ok(result);
             })
             .WithTags("Vehicle");

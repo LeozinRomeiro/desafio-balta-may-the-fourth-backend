@@ -11,14 +11,15 @@ namespace StarLs.Api.Endpoints
         public static void MapCharacterRoutes(this WebApplication app)
         {
             app.MapGet("/characters", async ([FromServices] IHandler<GetCharacterQueryRequest, List<GetCharacterQueryResponse>> handler, [FromServices] IMemoryCache cache) =>
-            {   
-                var memoryCache = cache.GetOrCreate("CharactersCache", item =>
+            {
+                var result = await cache.GetOrCreateAsync("CharactersCache", async item =>
                 {
+                    item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
                     item.SlidingExpiration = TimeSpan.FromHours(1);
-                    return DateTime.Now;
+
+                    return await handler.Send(new GetCharacterQueryRequest());
                 });
 
-                var result = await handler.Send(new GetCharacterQueryRequest());
                 return Results.Ok(result);
             })
             .WithTags("Character");
