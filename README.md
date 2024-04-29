@@ -6,7 +6,7 @@
 **May the Fourth** é a quarta edição dos **Desafios .NET** realizados pelo [balta.io](https://balta.io). Durante esta jornada, fizemos parte do batalhão backend onde unimos forças para entregar um App completo.
 
 ## 📱 Projeto
-Desenvolvimento de uma API completa, fornecendo recursos como criação, leitura, atualização e exclusão de dados referentes ao universo **Star Wars**.
+Desenvolvimento de uma API, fornecendo O recurso de leitura referentes ao universo **Star Wars**.
 
 ## Participantes
 ### 🚀 Capitão
@@ -30,8 +30,31 @@ Rodolfo Jesus - https://github.com/lrodolfol
 * Networking
 * Muito conhecimento técnico
 
+## ⚙️ Como rodar o projeto
+#### para popular o banco de dados:
+Configure <b>'StarLs.SeedDataBase'</b> como projeto de inicialização e rode em modo de debug 
+<br> ou <br>
+Acesse: ./src/StarLs.SeedDataBase e rode o seguinte comando:
+```
+dotnet run
+```
+Retorne '<b>StarLs.Api'</b> como projeto de inicialização e execute o seguinte comando:
+```
+dotnet run
+```
+
+## Padrões e codigos utilizados:
+* Repository
+* Mediator
+* Cache em memória
+* Teste de unidade
+
+
 ## 🧪 Como testar o projeto
-[DESCREVER COMO EXECUTAR O PROJETO]
+Acesse .src/StarLs.Tests e rode o seguinte comando:
+```
+dotnet test
+```
 
 # 💜 Participe
 Quer participar dos próximos desafios? Junte-se a [maior comunidade .NET do Brasil 🇧🇷 💜](https://balta.io/discord)

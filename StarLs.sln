@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarLs.Core", "src\StarLs.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarLs.Infra", "src\StarLs.Infra\StarLs.Infra.csproj", "{9FD76A76-B7EC-4328-AE44-233F81AFC4A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarLs.SeedDataBase", "src\StarLs.SeedDataBase\StarLs.SeedDataBase.csproj", "{26FAFB44-1FB6-414B-91DF-466811ACEAC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarLs.SeedDataBase", "src\StarLs.SeedDataBase\StarLs.SeedDataBase.csproj", "{26FAFB44-1FB6-414B-91DF-466811ACEAC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarLs.Tests", "src\StarLs.Tests\StarLs.Tests.csproj", "{78E16B5A-D9F1-4371-9182-64530981BBCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{26FAFB44-1FB6-414B-91DF-466811ACEAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26FAFB44-1FB6-414B-91DF-466811ACEAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26FAFB44-1FB6-414B-91DF-466811ACEAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E16B5A-D9F1-4371-9182-64530981BBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E16B5A-D9F1-4371-9182-64530981BBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E16B5A-D9F1-4371-9182-64530981BBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E16B5A-D9F1-4371-9182-64530981BBCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +57,9 @@ Global
 		{70A92902-9C4A-4EA8-86B2-00A28C14C5E6} = {503135E5-78A1-4453-AE41-32CE7C8A1782}
 		{9FD76A76-B7EC-4328-AE44-233F81AFC4A8} = {503135E5-78A1-4453-AE41-32CE7C8A1782}
 		{26FAFB44-1FB6-414B-91DF-466811ACEAC6} = {503135E5-78A1-4453-AE41-32CE7C8A1782}
+		{78E16B5A-D9F1-4371-9182-64530981BBCF} = {503135E5-78A1-4453-AE41-32CE7C8A1782}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F44105D-F69F-4AA0-B245-3C34FE3DBE5F}
 	EndGlobalSection
 EndGlobal
