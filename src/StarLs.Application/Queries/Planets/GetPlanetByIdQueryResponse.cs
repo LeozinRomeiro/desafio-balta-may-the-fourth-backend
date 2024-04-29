@@ -6,7 +6,7 @@ namespace StarLs.Application.Queries.Planets;
 public class GetPlanetByIdQueryResponse
 {
     public short Id { get; set; }
-    public string Name { get; private set; } = null!;
+    public string Title { get; private set; } = null!;
     public string RotationPeriod { get; private set; } = null!;
     public string OrbitalPeriod { get; private set; } = null!;
     public string Diameter { get; private set; } = null!;

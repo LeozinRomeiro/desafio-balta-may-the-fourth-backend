@@ -18,12 +18,18 @@ builder.Services.AddSwaggerGen(x =>
     });
 });
 
+const string CORSPOLICYNAME = "STARPICOR";
+
+builder.AddPolicyPermission(CORSPOLICYNAME);
 builder.ConfigureDatabase();
 builder.ConfigureRepositories();
 builder.ConfigureHandlers();
 
+builder.Services.AddMemoryCache();
+
 var app = builder.Build();
 
+app.UseCors(CORSPOLICYNAME);
 app.MapEndpoints();
 app.UseExceptionMiddleware();
 
