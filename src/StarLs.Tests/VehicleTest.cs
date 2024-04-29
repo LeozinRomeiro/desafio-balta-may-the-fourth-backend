@@ -1,4 +1,6 @@
 using NSubstitute;
+using StarLs.Application.Queries.Starships;
+using StarLs.Application.Queries;
 using StarLs.Application.Queries.Vehicles;
 using StarLs.Core.Entities;
 using StarLs.Core.Repositories.Interfaces;
@@ -63,5 +65,20 @@ public class VehicleTest : BaseTests, IAsyncLifetime
         var result = await handler.Send(request);
 
         Assert.Equal(result.FirstOrDefault(x => x.Id == id)!.Name, _vehicles.FirstOrDefault(x => x.Id == id)!.Name);
+    }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(1, 2)]
+    [InlineData(1, 3)]
+    public async void GivenAValidRequest_ShouldReturn_ResponseWithAnyVehicle_WithPagination(short pageNumber, short pageSize)
+    {
+        var handler = new GetVehicleQueryHandler(_vehicleRepository, GetMapper());
+        var request = new GetVehicleQueryRequest();
+
+        var resultHandler = await handler.Send(request);
+        var result = new QueryResult<GetVehicleQueryResponse>(pageNumber, pageSize, resultHandler).Results!;
+
+        Assert.Equal(pageSize, result.Count);
     }
 }

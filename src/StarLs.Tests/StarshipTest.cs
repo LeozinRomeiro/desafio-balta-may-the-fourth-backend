@@ -1,4 +1,6 @@
 using NSubstitute;
+using StarLs.Application.Queries.Movies;
+using StarLs.Application.Queries;
 using StarLs.Application.Queries.Starships;
 using StarLs.Core.Entities;
 using StarLs.Core.Repositories.Interfaces;
@@ -60,8 +62,23 @@ public class StarshipTest : BaseTests, IAsyncLifetime
         var handler = new GetStarshipQueryHandler(_starshipRepository, GetMapper());
         var request = new GetStarshipQueryRequest();
 
-        var result = await handler.Send(request);
+        var resultHandler = await handler.Send(request);
 
-        Assert.Equal(result.FirstOrDefault(x => x.Id == id)!.Name, _starships.FirstOrDefault(x => x.Id == id)!.Name);
+        Assert.Equal(resultHandler.FirstOrDefault(x => x.Id == id)!.Name, _starships.FirstOrDefault(x => x.Id == id)!.Name);
+    }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(1, 2)]
+    [InlineData(1, 3)]
+    public async void GivenAValidRequest_ShouldReturn_ResponseWithAnyStarship_WithPagination(short pageNumber, short pageSize)
+    {
+        var handler = new GetStarshipQueryHandler(_starshipRepository, GetMapper());
+        var request = new GetStarshipQueryRequest();
+
+        var resultHandler = await handler.Send(request);
+        var result = new QueryResult<GetStarshipQueryResponse>(pageNumber, pageSize, resultHandler).Results!;
+
+        Assert.Equal(pageSize, result.Count);
     }
 }

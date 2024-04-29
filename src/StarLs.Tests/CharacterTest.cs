@@ -1,5 +1,7 @@
 using NSubstitute;
+using StarLs.Application.Queries;
 using StarLs.Application.Queries.Characters;
+using StarLs.Application.Queries.Planets;
 using StarLs.Core.Entities;
 using StarLs.Core.Repositories.Interfaces;
 using StarLs.Tests.Builders.Entities;
@@ -63,5 +65,20 @@ public class CharacterTest : BaseTests, IAsyncLifetime
         var result = await handler.Send(request);
 
         Assert.Equal(result.FirstOrDefault(x => x.Id == id)!.Name, _characters.FirstOrDefault(x => x.Id == id)!.Name);
+    }
+
+    [Theory]
+    [InlineData(1, 1)]
+    [InlineData(1, 2)]
+    [InlineData(1, 3)]
+    public async void GivenAValidRequest_ShouldReturn_ResponseWithAnyPlanet_WithPagination(short pageNumber, short pageSize)
+    {
+        var handler = new GetCharacterQueryHandler(_characterRepository, GetMapper());
+        var request = new GetCharacterQueryRequest();
+
+        var resultHandler = await handler.Send(request);
+        var result = new QueryResult<GetCharacterQueryResponse>(pageNumber, pageSize, resultHandler).Results!;
+
+        Assert.Equal(pageSize, result.Count);
     }
 }
