@@ -8,9 +8,9 @@ public static class Security
         {
             x.AddPolicy(corsName,policy =>
                                     policy
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod()
                                         .AllowAnyOrigin()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
                        );
         });
     }
