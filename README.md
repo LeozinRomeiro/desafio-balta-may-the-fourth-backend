@@ -56,5 +56,9 @@ Acesse .src/StarLs.Tests e rode o seguinte comando:
 dotnet test
 ```
 
+Equipe de apoio no frontEnd:<br>
+https://github.com/paulinhps/desafio-balta-may-the-fourth-frontend <br>
+https://my-the-fourth-challenge.onrender.com/
+
 # 💜 Participe
 Quer participar dos próximos desafios? Junte-se a [maior comunidade .NET do Brasil 🇧🇷 💜](https://balta.io/discord)
