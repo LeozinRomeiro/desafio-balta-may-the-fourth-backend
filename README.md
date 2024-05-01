@@ -8,6 +8,9 @@
 ## 📱 Projeto
 Desenvolvimento de uma API, fornecendo O recurso de leitura referentes ao universo **Star Wars**.
 
+## Endereço da API
+https://devs-da-resistencia.azurewebsites.net/swagger/index.html
+
 ## Participantes
 ### 🚀 Capitão
 Rodolfo Jesus - https://github.com/lrodolfol
