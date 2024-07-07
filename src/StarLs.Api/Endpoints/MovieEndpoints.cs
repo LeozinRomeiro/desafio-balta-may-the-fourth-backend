@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using StarLs.Application.Queries;
 using StarLs.Application.Queries.Movies;
 using StarLs.Core.Handlers.Interface;
 
@@ -8,15 +10,28 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapMovieRoutes(this WebApplication app)
         {
-            app.MapGet("/movies", ([FromServices] IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>> handler) =>
+            app.MapGet("/movies", async ([FromServices] IHandler<GetMovieQueryRequest, List<GetMovieQueryResponse>> handler, [FromServices] IMemoryCache cache, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 2) =>
             {
-                return Results.Ok(handler.Send(new GetMovieQueryRequest()));
-            });
+                var result = new QueryResult<GetMovieQueryResponse>(pageNumber, pageSize,
+                    await cache.GetOrCreateAsync("MoviesCache", async item =>
+                    {
+                        item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
+                        item.SlidingExpiration = TimeSpan.FromHours(12);
 
-            app.MapGet("/movies/{id}", ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler,[FromRoute] short id) =>
+                        return await handler.Send(new GetMovieQueryRequest());
+                    })
+                    );
+                
+                return Results.Ok(result);
+            })
+            .WithTags("Movies");
+
+            app.MapGet("/movies/{id}", async ([FromServices] IHandler<GetMovieByIdQueryRequest, GetMovieByIdQueryResponse> handler,[FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetMovieByIdQueryRequest(id)));
-            });
+                var result = await handler.Send(new GetMovieByIdQueryRequest(id));
+                return Results.Ok(result);
+            })
+            .WithTags("Movies");
         }
     }
 }

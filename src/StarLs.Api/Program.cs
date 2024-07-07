@@ -1,25 +1,41 @@
-using Microsoft.AspNetCore.Mvc;
-using StarLs.Api.Endpoints;
 using StarLs.Api.Extensions;
-using StarLs.Application.Queries.Characters;
-using StarLs.Application.Queries.Movies;
-using StarLs.Core.Entities;
-using StarLs.Core.Handlers.Interface;
-using System.Text.Json;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHttpClient();
+
+builder.Services.AddSwaggerGen(x =>
+{
+    x.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Starls - BackendTeam",
+        Description = "Developed by: Anthony D | Kirmct N | Leonardo R | Rodolfo J | Victor A",
+        Contact = new OpenApiContact { Url = new Uri("https://github.com/lrodolfol/desafio-balta-may-the-fourth-backend") },
+        License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
+    });
+});
+
+const string CORSPOLICYNAME = "STARPICOR";
+
+builder.AddPolicyPermission(CORSPOLICYNAME);
 builder.ConfigureDatabase();
-
-//add repositories
 builder.ConfigureRepositories();
-
-//add handlers
 builder.ConfigureHandlers();
+
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
-
+app.UseCors(CORSPOLICYNAME);
 app.MapEndpoints();
+app.UseExceptionMiddleware();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseHttpsRedirection();
 
 app.Run();

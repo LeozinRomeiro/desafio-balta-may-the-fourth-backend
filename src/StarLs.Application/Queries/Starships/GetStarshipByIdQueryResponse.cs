@@ -5,16 +5,19 @@ namespace StarLs.Application.Queries.Starships;
 
 public class GetStarshipByIdQueryResponse
 {
-    public short Id { get; set; }
+    public short Id { get; private set; }
     public string Name { get; private set; } = null!;
-    public string RotationPeriod { get; private set; } = null!;
-    public string OrbitalPeriod { get; private set; } = null!;
-    public string Diameter { get; private set; } = null!;
-    public string Climate { get; private set; } = null!;
-    public string Gravity { get; private set; } = null!;
-    public string Terrain { get; private set; } = null!;
-    public string SurfaceWater { get; private set; } = null!;
-    public string Population { get; private set; } = null!;
-    public List<CharacterDto> Characters { get; private set; } = null!;
+    public string Model { get; private set; } = null!;
+    public string Manufacturer { get; private set; } = null!;
+    public string CostInCredits { get; private set; } = null!;
+    public string Length { get; private set; } = null!;
+    public string MaxSpeed { get; private set; } = null!;
+    public string Crew { get; private set; } = null!;
+    public string Passengers { get; private set; } = null!;
+    public string CargoCapacity { get; private set; } = null!;
+    public string HyperdriveRating { get; private set; } = null!;
+    public string Mglt { get; private set; } = null!;
+    public string Consumables { get; private set; } = null!;
+    public string Class { get; private set; } = null!;
     public List<MovieDto> Movies { get; private set; } = null!;
 }

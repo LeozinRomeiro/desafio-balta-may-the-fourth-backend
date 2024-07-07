@@ -25,8 +25,8 @@ public class AutoMapperProfile : Profile
         CreateMap<GetStarshipQueryResponse, Starship>().ReverseMap();
         CreateMap<GetStarshipByIdQueryResponse, Starship>().ReverseMap();
 
-        CreateMap<GetVehicleQueryHandler, Vehicle>().ReverseMap();
-        CreateMap<GetVehicleByIdQueryHandler, Vehicle>().ReverseMap();
+        CreateMap<GetVehicleQueryResponse, Vehicle>().ReverseMap();
+        CreateMap<GetVehicleByIdQueryResponse, Vehicle>().ReverseMap();
 
         CreateMap<Character, CharacterDto>().ReverseMap();
         CreateMap<Movie, MovieDto>().ReverseMap();

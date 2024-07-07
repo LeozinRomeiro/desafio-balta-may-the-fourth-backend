@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using StarLs.Application.Queries;
 using StarLs.Application.Queries.Starships;
 using StarLs.Core.Handlers.Interface;
 
@@ -8,15 +10,28 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapStarshipRoutes(this WebApplication app)
         {
-            app.MapGet("/starships", ([FromServices] IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>> handler) =>
+            app.MapGet("/starships", async ([FromServices] IHandler<GetStarshipQueryRequest, List<GetStarshipQueryResponse>> handler, [FromServices] IMemoryCache cache, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10) =>
             {
-                return Results.Ok(handler.Send(new GetStarshipQueryRequest()));
-            });
+                var result = new QueryResult<GetStarshipQueryResponse>(pageNumber, pageSize,
+                    await cache.GetOrCreateAsync("StarshipsCache", async item =>
+                    {
+                        item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
+                        item.SlidingExpiration = TimeSpan.FromHours(12);
 
-            app.MapGet("/starships/{id}", ([FromServices] IHandler<GetStarshipByIdQueryRequest, GetStarshipByIdQueryResponse> handler,[FromRoute] short id) =>
+                        return await handler.Send(new GetStarshipQueryRequest());
+                    })
+                    );
+                
+                return Results.Ok(result);
+            })
+            .WithTags("Starship");
+
+            app.MapGet("/starships/{id}", async ([FromServices] IHandler<GetStarshipByIdQueryRequest, GetStarshipByIdQueryResponse> handler,[FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetStarshipByIdQueryRequest(id)));
-            });
+                var result = await handler.Send(new GetStarshipByIdQueryRequest(id));
+                return Results.Ok(result);
+            })
+            .WithTags("Starship");
         }
     }
 }

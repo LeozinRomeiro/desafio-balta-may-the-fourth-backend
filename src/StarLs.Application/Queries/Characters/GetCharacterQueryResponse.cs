@@ -4,6 +4,7 @@ namespace StarLs.Application.Queries.Characters;
 
 public class GetCharacterQueryResponse
 {
+    public short Id { get; private set; }
     public string Name { get; private set; } = null!;
     public string Height { get; private set; } = null!;
     public string Weight { get; private set; } = null!;

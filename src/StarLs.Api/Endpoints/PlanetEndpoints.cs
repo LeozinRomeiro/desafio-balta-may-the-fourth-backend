@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using StarLs.Application.Queries;
 using StarLs.Application.Queries.Planets;
 using StarLs.Core.Handlers.Interface;
 
@@ -8,15 +10,28 @@ namespace StarLs.Api.Endpoints
     {
         public static void MapPlanetRoutes(this WebApplication app)
         {
-            app.MapGet("/planets", ([FromServices] IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>> handler) =>
+            app.MapGet("/planets", async ([FromServices] IHandler<GetPlanetQueryRequest, List<GetPlanetQueryResponse>> handler, [FromServices] IMemoryCache cache, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 20) =>
             {
-                return Results.Ok(handler.Send(new GetPlanetQueryRequest()));
-            });
+                var result = new QueryResult<GetPlanetQueryResponse>(pageNumber, pageSize,
+                    await cache.GetOrCreateAsync("PlanetsCache", async item =>
+                    {
+                        item.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
+                        item.SlidingExpiration = TimeSpan.FromHours(12);
 
-            app.MapGet("/planets/{id}", ([FromServices] IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse> handler,[FromRoute] short id) =>
+                        return await handler.Send(new GetPlanetQueryRequest());
+                    })
+                    );
+                
+                return Results.Ok(result);
+            })
+            .WithTags("Planets");
+
+            app.MapGet("/planets/{id}", async ([FromServices] IHandler<GetPlanetByIdQueryRequest, GetPlanetByIdQueryResponse> handler,[FromRoute] short id) =>
             {
-                return Results.Ok(handler.Send(new GetPlanetByIdQueryRequest(id)));
-            });
+                var result = await handler.Send(new GetPlanetByIdQueryRequest(id));
+                return Results.Ok(result);
+            })
+            .WithTags("Planets");
         }
     }
 }
